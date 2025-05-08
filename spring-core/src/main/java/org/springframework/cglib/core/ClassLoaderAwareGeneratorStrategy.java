@@ -22,6 +22,9 @@ package org.springframework.cglib.core;
  * The ASM ClassWriter in Spring's ASM variant will pick it up when doing
  * common superclass resolution.
  *
+ * CGLIB GENTORTATSTATGY变体，该变体将应用程序classloader作为当前线程上下文class Loader在类生成时间中。
+ * Spring的ASM变体中的ASM ClassWriter在执行共同的超类分辨率时会捡起它。
+ *
  * @author Juergen Hoeller
  * @since 5.2
  */

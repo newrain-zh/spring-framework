@@ -127,6 +127,7 @@ public class AnnotatedBeanDefinitionReader {
 
 	/**
 	 * Register one or more component classes to be processed.
+	 * 注册一个或多个要处理的组件类。
 	 * <p>Calls to {@code register} are idempotent; adding the same
 	 * component class more than once has no additional effect.
 	 * @param componentClasses one or more component classes,

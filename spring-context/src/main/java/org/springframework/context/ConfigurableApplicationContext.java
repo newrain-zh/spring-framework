@@ -30,7 +30,9 @@ import org.springframework.lang.Nullable;
  * SPI interface to be implemented by most if not all application contexts.
  * Provides facilities to configure an application context in addition
  * to the application context client methods in the
- * {@link org.springframework.context.ApplicationContext} interface.
+ * SPI接口将由大多数（如果不是全部）上下文实现。除应用程序上下文客户端方法外，还提供了配置应用程序上下文的设施
+ * {@link org.springframework.context.ApplicationContext} interf
+ * ace.
  *
  * <p>Configuration and lifecycle methods are encapsulated here to avoid
  * making them obvious to ApplicationContext client code. The present
@@ -40,6 +42,40 @@ import org.springframework.lang.Nullable;
  * @author Chris Beams
  * @author Sam Brannen
  * @since 03.11.2003
+ */
+
+/**
+ * SPI 接口，作为 Spring 应用上下文的核心配置接口。主要提供三大能力：
+ *
+ * 1. **上下文配置能力**：
+ *    - 支持设置唯一ID(setId)、父级上下文(setParent)和自定义环境(setEnvironment)
+ *    - 允许添加 BeanFactory 后处理器(addBeanFactoryPostProcessor)
+ *    - 支持注册协议解析器(addProtocolResolver)和自定义类加载器(setClassLoader)
+ *
+ * 2. **生命周期控制**：
+ *    - 通过 refresh() 方法初始化/刷新上下文配置（支持热加载）
+ *    - 通过 close() 方法优雅关闭上下文，释放资源
+ *    - 提供 registerShutdownHook() 注册JVM关闭钩子
+ *    - 继承自 Lifecycle 接口的启动/停止控制
+ *
+ * 3. **扩展访问能力**：
+ *    - 暴露内部 BeanFactory(getBeanFactory) @see org.springframework.beans.factory.BeanFactory
+ *    - 提供环境配置访问接口(getEnvironment)
+ *    - 支持添加应用监听器(addApplicationListener)
+ *
+ * ▎典型实现类：
+ * - AnnotationConfigApplicationContext：基于注解配置的上下文
+ * - ClassPathXmlApplicationContext：XML配置的类路径上下文
+ * - FileSystemXmlApplicationContext：文件系统XML配置上下文
+ * - GenericWebApplicationContext：Web应用上下文基类
+ *
+ * ▎设计特点：
+ * 1. 通过 CONFIG_LOCATION_DELIMITERS 常量定义多配置路径分隔符（支持,; \t\n）
+ * 2. 预定义关键Bean名称：
+ *    - CONVERSION_SERVICE_BEAN_NAME：类型转换服务
+ *    - LOAD_TIME_WEAVER_BEAN_NAME：类加载期织入
+ *    - ENVIRONMENT_BEAN_NAME：环境配置
+ * 3. 通过 SHUTDOWN_HOOK_THREAD_NAME 规范关闭线程命名
  */
 public interface ConfigurableApplicationContext extends ApplicationContext, Lifecycle, Closeable {
 

@@ -71,6 +71,12 @@ public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 	 * @see org.springframework.beans.factory.support.AbstractBeanDefinition#getFactoryMethodName()
 	 */
 	@Nullable
+	/*
+	在实例化 Bean 前调用（调用 Bean 的构造函数之前）
+	可以返回一个自定义的 Bean 实例（完全替代 Spring 默认的实例化逻辑）。
+	如果返回非 null 对象，Spring 会直接使用它作为 Bean，并跳过后续的实例化和属性填充。
+	如果返回 null，Spring 继续执行默认的实例化逻辑。
+	 */
 	default Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
 		return null;
 	}
@@ -89,6 +95,11 @@ public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 	 * instances being invoked on this bean instance.
 	 * @throws org.springframework.beans.BeansException in case of errors
 	 * @see #postProcessBeforeInstantiation
+	 */
+	 /*
+	调用时机：在 Bean 实例化之后，但在 属性填充之前。
+	用途：可以在此阶段手动填充属性，或阻止默认的属性填充。
+	如果返回 false，Spring 会跳过默认的属性填充逻辑。
 	 */
 	default boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
 		return true;

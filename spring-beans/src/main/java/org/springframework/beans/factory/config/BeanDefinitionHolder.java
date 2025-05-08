@@ -31,6 +31,10 @@ import org.springframework.util.StringUtils;
  * definitions. If you don't care about BeanNameAware and the like,
  * registering RootBeanDefinition or ChildBeanDefinition is good enough.
  *
+ * Holder 用于具有 name 和 alias 的 BeanDefinition。可以注册为内部 Bean 的占位符。
+ * <p>还可用于内部 Bean 定义的编程注册。
+ * 如果你不关心 BeanNameAware 之类的东西，注册 RootBeanDefinition 或 ChildBeanDefinition 就足够了。
+ *
  * @author Juergen Hoeller
  * @since 1.0.2
  * @see org.springframework.beans.factory.BeanNameAware

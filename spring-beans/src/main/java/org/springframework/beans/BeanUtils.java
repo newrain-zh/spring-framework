@@ -93,6 +93,7 @@ public abstract class BeanUtils {
 
 	/**
 	 * Convenience method to instantiate a class using its no-arg constructor.
+	 * 使用其NO-ARG构造函数实例化类的便利方法。
 	 * @param clazz class to instantiate
 	 * @return the new instance
 	 * @throws BeanInstantiationException if the bean cannot be instantiated

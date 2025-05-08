@@ -21,6 +21,7 @@ import java.util.EventObject;
 /**
  * Class to be extended by all application events. Abstract as it
  * doesn't make sense for generic events to be published directly.
+ * 所有应用程序事件都将扩展课程。摘要，因为直接发布通用事件是没有意义的
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
@@ -29,29 +30,36 @@ import java.util.EventObject;
  */
 public abstract class ApplicationEvent extends EventObject {
 
-	/** use serialVersionUID from Spring 1.2 for interoperability. */
-	private static final long serialVersionUID = 7099057708183571937L;
+    /**
+     * use serialVersionUID from Spring 1.2 for interoperability.
+     */
+    private static final long serialVersionUID = 7099057708183571937L;
 
-	/** System time when the event happened. */
-	private final long timestamp;
-
-
-	/**
-	 * Create a new {@code ApplicationEvent}.
-	 * @param source the object on which the event initially occurred or with
-	 * which the event is associated (never {@code null})
-	 */
-	public ApplicationEvent(Object source) {
-		super(source);
-		this.timestamp = System.currentTimeMillis();
-	}
+    /**
+     * System time when the event happened.
+     */
+    // 事件发生事件
+    private final long timestamp;
 
 
-	/**
-	 * Return the system time in milliseconds when the event occurred.
-	 */
-	public final long getTimestamp() {
-		return this.timestamp;
-	}
+    /**
+     * Create a new {@code ApplicationEvent}.
+     * 创建一个 ApplicationEvent(应用事件)
+     *
+     * @param source the object on which the event initially occurred or with
+     *               which the event is associated (never {@code null})
+     */
+    public ApplicationEvent(Object source) {
+        super(source);
+        this.timestamp = System.currentTimeMillis();
+    }
+
+
+    /**
+     * Return the system time in milliseconds when the event occurred.
+     */
+    public final long getTimestamp() {
+        return this.timestamp;
+    }
 
 }

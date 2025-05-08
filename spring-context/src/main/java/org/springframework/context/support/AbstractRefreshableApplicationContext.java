@@ -119,6 +119,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 */
 	@Override
 	protected final void refreshBeanFactory() throws BeansException {
+		System.out.println("AbstractRefreshableApplicationContext#refreshBeanFactory");
 		if (hasBeanFactory()) {
 			destroyBeans();
 			closeBeanFactory();

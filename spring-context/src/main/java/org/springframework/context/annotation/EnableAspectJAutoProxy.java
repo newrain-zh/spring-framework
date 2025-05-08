@@ -16,11 +16,7 @@
 
 package org.springframework.context.annotation;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Enables support for handling components marked with AspectJ's {@code @Aspect} annotation,
@@ -42,7 +38,7 @@ import java.lang.annotation.Target;
  *         return new MyAspect();
  *     }
  * }</pre>
- *
+ * <p>
  * Where {@code FooService} is a typical POJO component and {@code MyAspect} is an
  * {@code @Aspect}-style aspect:
  *
@@ -61,7 +57,7 @@ import java.lang.annotation.Target;
  *         // advise FooService methods as appropriate
  *     }
  * }</pre>
- *
+ * <p>
  * In the scenario above, {@code @EnableAspectJAutoProxy} ensures that {@code MyAspect}
  * will be properly processed and that {@code FooService} will be proxied mixing in the
  * advice that it contributes.
@@ -89,7 +85,7 @@ import java.lang.annotation.Target;
  * &#064;Aspect
  * &#064;Component
  * public class MyAspect { ... }</pre>
- *
+ * <p>
  * Then use the @{@link ComponentScan} annotation to pick both up:
  *
  * <pre class="code">
@@ -113,27 +109,36 @@ import java.lang.annotation.Target;
  *
  * @author Chris Beams
  * @author Juergen Hoeller
- * @since 3.1
  * @see org.aspectj.lang.annotation.Aspect
+ * @since 3.1
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+// EnableAspectJAutoProxy 会注册AnnotationAwareAspectJAutoProxyCreator
+//（Bean name [org.springframework.aop.config.internalAutoProxyCreator]）
 @Import(AspectJAutoProxyRegistrar.class)
 public @interface EnableAspectJAutoProxy {
 
-	/**
-	 * Indicate whether subclass-based (CGLIB) proxies are to be created as opposed
-	 * to standard Java interface-based proxies. The default is {@code false}.
-	 */
-	boolean proxyTargetClass() default false;
+    /**
+     * Indicate whether subclass-based (CGLIB) proxies are to be created as opposed
+     * to standard Java interface-based proxies. The default is {@code false}.
+     * 指示基于子类（CGLIB）代理是否应与标准Java接口的代理相反。默认值为{@code false}。
+     * true 表示创建基于子类的代理（cglib），false 表示创建基于接口的代理(jdk proxy)
+     */
+    boolean proxyTargetClass() default false;
 
-	/**
-	 * Indicate that the proxy should be exposed by the AOP framework as a {@code ThreadLocal}
-	 * for retrieval via the {@link org.springframework.aop.framework.AopContext} class.
-	 * Off by default, i.e. no guarantees that {@code AopContext} access will work.
-	 * @since 4.3.1
-	 */
-	boolean exposeProxy() default false;
+    /**
+     * Indicate that the proxy should be exposed by the AOP framework as a {@code ThreadLocal}
+     * for retrieval via the {@link org.springframework.aop.framework.AopContext} class.
+     * Off by default, i.e. no guarantees that {@code AopContext} access will work.
+     * exposeProxy 是 @EnableAspectJAutoProxy 注解的配置属性，
+     * 用于控制是否将当前 AOP 代理对象暴露到 AopContext，
+     * 以便在类内部方法调用时通过 AopContext.currentProxy() 获取代理对象，
+     * 使切面逻辑在自调用场景中生效。
+     *
+     * @since 4.3.1
+     */
+    boolean exposeProxy() default false;
 
 }

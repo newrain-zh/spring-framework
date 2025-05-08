@@ -72,6 +72,8 @@ public interface SmartInstantiationAwareBeanPostProcessor extends InstantiationA
 	 * <p>This callback gives post-processors a chance to expose a wrapper
 	 * early - that is, before the target bean instance is fully initialized.
 	 * The exposed object should be equivalent to the what
+	 * 获取对指定 Bean 的早期访问的引用，通常用于解析循环引用。
+	 * <p>此回调使后处理器有机会尽早公开包装器 - 即，在目标 Bean 实例完全初始化之前。暴露的对象应该等价于 what
 	 * {@link #postProcessBeforeInitialization} / {@link #postProcessAfterInitialization}
 	 * would expose otherwise. Note that the object returned by this method will
 	 * be used as bean reference unless the post-processor returns a different

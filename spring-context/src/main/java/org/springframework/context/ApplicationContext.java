@@ -27,7 +27,7 @@ import org.springframework.lang.Nullable;
  * Central interface to provide configuration for an application.
  * This is read-only while the application is running, but may be
  * reloaded if the implementation supports this.
- *
+ * 中央接口为应用程序提供配置。该应用程序正在运行时仅读取，但是如果实现支持此功能，则可以重新加载。
  * <p>An ApplicationContext provides:
  * <ul>
  * <li>Bean factory methods for accessing application components.
@@ -73,6 +73,7 @@ public interface ApplicationContext extends EnvironmentCapable, ListableBeanFact
 
 	/**
 	 * Return a friendly name for this context.
+	 * 返回此上下文的友好名称。
 	 * @return a display name for this context (never {@code null})
 	 */
 	String getDisplayName();
@@ -87,6 +88,7 @@ public interface ApplicationContext extends EnvironmentCapable, ListableBeanFact
 	 * Return the parent context, or {@code null} if there is no parent
 	 * and this is the root of the context hierarchy.
 	 * @return the parent context, or {@code null} if there is no parent
+	 * 返回父上下文，或{@code null}，如果没有父，这是上下文层次结构的根。 @return父级上下文，或{@code null}如果没有父
 	 */
 	@Nullable
 	ApplicationContext getParent();

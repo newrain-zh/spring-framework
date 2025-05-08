@@ -73,6 +73,7 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	/**
 	 * Constant that indicates autowiring bean properties by name
 	 * (applying to all bean property setters).
+	 *  指示按名称自动装配 Bean 属性的常量（适用于所有 Bean 属性 setter）
 	 * @see #createBean
 	 * @see #autowire
 	 * @see #autowireBeanProperties
@@ -82,6 +83,7 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	/**
 	 * Constant that indicates autowiring bean properties by type
 	 * (applying to all bean property setters).
+	 * 指示按类型自动装配 Bean 属性的常量（适用于所有 Bean 属性 setter）。
 	 * @see #createBean
 	 * @see #autowire
 	 * @see #autowireBeanProperties

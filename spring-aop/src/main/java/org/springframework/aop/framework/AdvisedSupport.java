@@ -72,6 +72,7 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 
 
 	/** Package-protected to allow direct access for efficiency. */
+	// 源对象
 	TargetSource targetSource = EMPTY_TARGET_SOURCE;
 
 	/** Whether the Advisors are already filtered for the specific target class. */
@@ -81,6 +82,8 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 	AdvisorChainFactory advisorChainFactory = new DefaultAdvisorChainFactory();
 
 	/** Cache with Method as key and advisor chain List as value. */
+	// 以 Method 作为键，以 advisor chain List 作为值的缓存
+	// 这里存了所有需要拦截的方法，key 是方法名，value 是 Advisor 链
 	private transient Map<MethodCacheKey, List<Object>> methodCache;
 
 	/**

@@ -62,6 +62,7 @@ public class AspectMetadata implements Serializable {
 	/**
 	 * AspectJ reflection information (AspectJ 5 / Java 5 specific).
 	 * Re-resolved on deserialization since it isn't serializable itself.
+	 * axpectJ反射信息（aptivej 5 java 5特异性）。重新分辨为避免化，因为它本身不是可序列化的。
 	 */
 	private transient AjType<?> ajType;
 
@@ -75,6 +76,8 @@ public class AspectMetadata implements Serializable {
 
 	/**
 	 * Create a new AspectMetadata instance for the given aspect class.
+	 *  为给定的方面类创建一个新的AspectMetadata实例。
+	 *
 	 * @param aspectClass the aspect class
 	 * @param aspectName the name of the aspect
 	 */
