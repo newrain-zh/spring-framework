@@ -555,14 +555,16 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
 
                 // Invoke factory processors registered as beans in the context.
                 // 5.处理bean的BeanPostProcessor
-                //   - 处理 Bean定义（解析@Bean 、@CommentScan @Import）
+                //   - 处理 Bean定义（解析@Bean 、@CommentScan @Import @Configuration）
                 //   - 如果启动了AOP 这里会注册代理处理类
+                //   - 事务前置处理
                 invokeBeanFactoryPostProcessors(beanFactory);
 
                 // Register bean processors that intercept bean creation.
                 // 6.注册 Bean 的 BeanPostProcessor 干预 Bean 的创建过程
                 //  a.注册所有BeanPostProcessor
                 //  b.按优先级排序（实现PriorityOrdered、Ordered接口）
+                //  c.容器 Bean 处理 如代理创建器org.springframework.aop.config.internalAutoProxyCreator
                 registerBeanPostProcessors(beanFactory);
 
                 // Initialize message source for this context.
@@ -588,7 +590,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
                 //  b.冻结Bean定义（禁止修改）
                 //  c.预实例化所有非懒加载单例Bean
                 //  d.这一步会执行 Bean的BeanPostProcessor postProcessBeforeInitialization的 postProcessAfterInitialization 方法
-                //  e. aop 代理类初始化
+                //  e.aop 代理类初始化（包括事务的切面）
                 finishBeanFactoryInitialization(beanFactory);
 
                 // Last step: publish corresponding event.

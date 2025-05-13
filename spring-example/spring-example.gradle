@@ -5,6 +5,7 @@ apply plugin: "kotlin"
 dependencies {
     compile(project(":spring-core"))
     optional(project(":spring-aop"))
+    optional(project(":spring-aspects"))
     optional(project(":spring-beans"))
     optional(project(":spring-context"))
     optional(project(":spring-jdbc"))

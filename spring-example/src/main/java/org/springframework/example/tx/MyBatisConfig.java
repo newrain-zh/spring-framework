@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -15,9 +16,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
-@EnableTransactionManagement
+
 @MapperScan("org.springframework.example.tx.mapper")
 @Configuration
+@EnableTransactionManagement()
 public class MyBatisConfig {
 
 
@@ -30,6 +32,7 @@ public class MyBatisConfig {
         config.setUsername("root");
         config.setPassword("123456");
         config.setMaximumPoolSize(10);
+        config.setPoolName("数据库线程池");
         return new HikariDataSource(config);
     }
 

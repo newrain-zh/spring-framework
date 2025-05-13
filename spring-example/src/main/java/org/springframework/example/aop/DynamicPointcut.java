@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Configuration;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+/**
+ * 动态切点示例
+ */
 @Configuration
 public class DynamicPointcut extends DynamicMethodMatcherPointcut {
 

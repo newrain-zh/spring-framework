@@ -363,7 +363,6 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport imp
             this.proxyTypes.put(cacheKey, proxy.getClass());
             return proxy; // 用代理对象替换原始的 Bean
         }
-
         this.advisedBeans.put(cacheKey, Boolean.FALSE); // 标识处理
         return bean;
     }

@@ -29,37 +29,42 @@ import org.springframework.util.ClassUtils;
  *
  * @author Chris Beams
  * @author Juergen Hoeller
- * @since 3.1
  * @see EnableTransactionManagement
  * @see ProxyTransactionManagementConfiguration
  * @see TransactionManagementConfigUtils#TRANSACTION_ASPECT_CONFIGURATION_CLASS_NAME
  * @see TransactionManagementConfigUtils#JTA_TRANSACTION_ASPECT_CONFIGURATION_CLASS_NAME
+ * @since 3.1
  */
 public class TransactionManagementConfigurationSelector extends AdviceModeImportSelector<EnableTransactionManagement> {
 
-	/**
-	 * Returns {@link ProxyTransactionManagementConfiguration} or
-	 * {@code AspectJ(Jta)TransactionManagementConfiguration} for {@code PROXY}
-	 * and {@code ASPECTJ} values of {@link EnableTransactionManagement#mode()},
-	 * respectively.
-	 */
-	@Override
-	protected String[] selectImports(AdviceMode adviceMode) {
-		switch (adviceMode) {
-			case PROXY:
-				return new String[] {AutoProxyRegistrar.class.getName(),
-						ProxyTransactionManagementConfiguration.class.getName()};
-			case ASPECTJ:
-				return new String[] {determineTransactionAspectClass()};
-			default:
-				return null;
-		}
-	}
+    /**
+     * Returns {@link ProxyTransactionManagementConfiguration} or
+     * {@code AspectJ(Jta)TransactionManagementConfiguration} for {@code PROXY}
+     * and {@code ASPECTJ} values of {@link EnableTransactionManagement#mode()},
+     * respectively.
+     */
+    @Override
+    // TransactionManagementConfigurationSelector
+    protected String[] selectImports(AdviceMode adviceMode) {
+        // 注意这里的 AdviceMode 取决于@EnableTransactionManagement注解中的mode属性
+        // 不是 @EnableAspectJAutoProxy的 proxyTargetClass属性
+        switch (adviceMode) { // 根据不同的模式选择不同的配置类
+            case PROXY:  // jdk动态代理模式
+                return new String[]{AutoProxyRegistrar.class.getName(), // 负责注册动态代理基础事务
+                        ProxyTransactionManagementConfiguration.class.getName()}; // 配置事务拦截器和切面
+            case ASPECTJ: // cjlib 切面模式
+                // org.springframework.transaction.aspectj.AspectJJtaTransactionManagementConfiguration
+                // org.springframework.transaction.aspectj.AspectJTransactionManagementConfiguration
+                return new String[]{determineTransactionAspectClass()};
+            default:
+                return null;
+        }
+    }
 
-	private String determineTransactionAspectClass() {
-		return (ClassUtils.isPresent("javax.transaction.Transactional", getClass().getClassLoader()) ?
-				TransactionManagementConfigUtils.JTA_TRANSACTION_ASPECT_CONFIGURATION_CLASS_NAME :
-				TransactionManagementConfigUtils.TRANSACTION_ASPECT_CONFIGURATION_CLASS_NAME);
-	}
+    private String determineTransactionAspectClass() {
+        return (ClassUtils.isPresent("javax.transaction.Transactional", getClass().getClassLoader()) ?
+                TransactionManagementConfigUtils.JTA_TRANSACTION_ASPECT_CONFIGURATION_CLASS_NAME :
+                TransactionManagementConfigUtils.TRANSACTION_ASPECT_CONFIGURATION_CLASS_NAME); // 事务拦截器和切面
+    }
 
 }

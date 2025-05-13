@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springframework.example.tx.mapper.TransferLogMapper">
+
+    <!-- 通用查询结果映射 -->
+    <resultMap id="BaseResultMap" type="com.example.entity.TransferLog">
+        <id column="id" property="id" />
+        <result column="transaction_id" property="transactionId" />
+        <result column="from_username" property="fromUsername" />
+        <result column="to_username" property="toUsername" />
+        <result column="amount" property="amount" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 插入转账记录 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO transfer_log (
+        transaction_id, from_username, to_username,
+        amount, status, remark
+        ) VALUES (
+        #{transactionId}, #{fromUsername}, #{toUsername},
+        #{amount}, #{status}, #{remark}
+        )
+    </insert>
+
+    <!-- 根据 transactionId 更新状态和备注 -->
+    <update id="updateStatusByTransactionId">
+        UPDATE transfer_log
+        SET
+        status = #{status},
+        remark = #{remark},
+        update_time = NOW()
+        WHERE
+        transaction_id = #{transactionId}
+    </update>
+
+</mapper>

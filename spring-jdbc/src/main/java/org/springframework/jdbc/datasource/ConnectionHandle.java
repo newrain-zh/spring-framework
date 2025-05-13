@@ -32,6 +32,7 @@ public interface ConnectionHandle {
 
 	/**
 	 * Fetch the JDBC Connection that this handle refers to.
+	 * 获取此句柄引用的 JDBC Connection。
 	 */
 	Connection getConnection();
 

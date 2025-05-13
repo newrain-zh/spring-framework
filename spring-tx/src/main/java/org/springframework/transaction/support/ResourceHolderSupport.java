@@ -56,6 +56,7 @@ public abstract class ResourceHolderSupport implements ResourceHolder {
 
 	/**
 	 * Return whether the resource is synchronized with a transaction.
+	 * 返回资源是否与事务同步。
 	 */
 	public boolean isSynchronizedWithTransaction() {
 		return this.synchronizedWithTransaction;
