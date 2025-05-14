@@ -10,6 +10,6 @@ import org.aspectj.lang.annotation.DeclareParents;
 @Aspect
 public class AuditableIntroductionAspect {
 
-    @DeclareParents(value = "org.springframework.example.service.UserServiceImpl", defaultImpl = AuditableImpl.class)
+    @DeclareParents(value = "org.springframework.example.aop.service.UserServiceImpl", defaultImpl = AuditableImpl.class)
     public Auditable auditable;
 }

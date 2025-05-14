@@ -2,7 +2,7 @@ package org.springframework.example;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.example.service.UserService;
+import org.springframework.example.aop.service.UserService;
 import org.springframework.example.processor.TimingBeanPostProcessor;
 
 import java.util.Arrays;

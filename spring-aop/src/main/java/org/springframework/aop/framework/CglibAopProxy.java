@@ -753,6 +753,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 			super(proxy, target, method, arguments, targetClass, interceptorsAndDynamicMethodMatchers);
 
 			// Only use method proxy for public methods not derived from java.lang.Object
+			// 仅使用未从java.lang.object派生的公共方法的方法代理
 			this.methodProxy = (isMethodProxyCompatible(method) ? methodProxy : null);
 		}
 

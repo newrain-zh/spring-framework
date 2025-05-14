@@ -1,4 +1,4 @@
-package org.springframework.example.service;
+package org.springframework.example.aop.service;
 
 import org.springframework.stereotype.Service;
 
@@ -17,5 +17,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public String getUser(String username) {
         return "";
+    }
+
+
+    private void test() {
+        System.out.println("test");
     }
 }

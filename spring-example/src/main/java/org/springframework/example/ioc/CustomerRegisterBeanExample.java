@@ -3,8 +3,8 @@ package org.springframework.example.ioc;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
-import org.springframework.example.service.UserService;
-import org.springframework.example.service.UserServiceImpl;
+import org.springframework.example.aop.service.UserService;
+import org.springframework.example.aop.service.UserServiceImpl;
 
 /**
  * 手动注册 Bean 并获取 Bean实例

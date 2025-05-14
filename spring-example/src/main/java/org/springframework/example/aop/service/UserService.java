@@ -1,4 +1,4 @@
-package org.springframework.example.service;
+package org.springframework.example.aop.service;
 
 public interface UserService {
 

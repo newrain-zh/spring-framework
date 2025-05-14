@@ -2,7 +2,7 @@ package org.springframework.example.ioc;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.example.service.UserService;
+import org.springframework.example.aop.service.UserService;
 
 /**
  * BeanFactory演示示例
